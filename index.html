@@ -74,9 +74,32 @@ var myIcon = L.icon({
     iconSize: [40, 40],
 });
 
-const singlemarker = L.marker([25.2375498, 82.5365209],{icon:myIcon})
-const popup = singlemarker.bindPopup("This is the khamaria").openPopup()
+const singlemarker = L.marker([25.2375498, 82.5365209],{icon:myIcon, draggable: true})
+const popup = singlemarker.bindPopup("This is the khamaria  " + singlemarker.getLatLng()).openPopup()
 popup.addTo(map)
 
+console.log(singlemarker.toGeoJSON())
+
+
+//Layer controller
+var baseMaps = {
+    "OSM": osm,
+    "water color map": watercolor,
+    "Dark":dark,                                          //Layer controller isn't working
+    "Google Street":googleStreets,
+    "Google Satellite":googleSat
+};
+
+var overlayMaps = {
+    "Marker": singlemarker
+};
+
+// map.removeLayer(osm)
+
+ L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
+
+ 
 
 </script>
